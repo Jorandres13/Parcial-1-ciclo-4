@@ -1,33 +1,23 @@
-public class Tarea implements Runnable{
-    private String[] datos;
-    private int count;
-    private int countFinal;
+public class Tarea implements Runnable {
+    private final String[] datos;
+    private int count = 0;
 
-    public Tarea(String[] datos){
+    public Tarea(String[] datos) {
         this.datos = datos;
     }
 
     @Override
-    public synchronized void  run() {
-        for (int i = 0; i < datos.length; i++) {
-            if (datos[i].equals("Java")) {
+    public void run() {
+        // No hace falta 'synchronized' aquí porque cada hilo
+        // tiene su propia instancia de Tarea (no comparten variables).
+        for (String lenguaje : datos) {
+            if ("Java".equals(lenguaje)) {
                 count++;
             }
-            countFinal = count + countFinal;
         }
     }
 
     public int getCount() {
         return count;
-    }
-    public void setCount(int count) {}
-
-    public String[] getDatos() {
-        return datos;
-    }
-    public void setDatos(String[] datos) {}
-
-    public int getCountFinal() {
-        return countFinal;
     }
 }
