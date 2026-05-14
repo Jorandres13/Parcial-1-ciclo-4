@@ -1,0 +1,37 @@
+public class App {
+    public static void main(String[] args) {
+        String [] fila1 = {"Java", "Python","Java"};
+        String [] fila2 = {"C++","Java","Go"};
+        String [] fila3 = {"Java","Rust","Java"};
+
+
+        // Runnable
+        var datos1 = new Tarea(fila1);
+        var th1 = new Thread(datos1);
+        var datos2 = new Tarea(fila2);
+        var th2 = new Thread(datos2);
+        var datos3 = new Tarea(fila3);
+        var th3 = new Thread(datos3);
+
+        th1.start();
+        th2.start();
+        th3.start();
+
+        try {
+            th1.join();
+            th2.join();
+            th3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf(" Hilo 0 finalizado. Encontrados: %d%n",
+                datos1.getCount());
+        System.out.printf(" Hilo 1 finalizado. Encontrados: %d%n",
+                datos2.getCount());
+        System.out.printf(" Hilo 2 finalizado. Encontrados: %d%n",
+                datos3.getCount());
+        System.out.printf(" Resultado Total: La palabra 'Java' aparece %d veces%n",
+                datos3.getCountFinal());
+    }
+}
+
